@@ -41,10 +41,10 @@ import (
 // function type that cannot be converted to an underlying function type with
 // a conventional conversion or type switch.
 var (
-	_reflFunc             = reflect.TypeOf(Func(nil))
-	_reflErrorFunc        = reflect.TypeOf(ErrorFunc(nil))
-	_reflContextFunc      = reflect.TypeOf(ContextFunc(nil))
-	_reflContextErrorFunc = reflect.TypeOf(ContextErrorFunc(nil))
+	_reflFunc             = reflect.TypeFor[Func]()
+	_reflErrorFunc        = reflect.TypeFor[ErrorFunc]()
+	_reflContextFunc      = reflect.TypeFor[ContextFunc]()
+	_reflContextErrorFunc = reflect.TypeFor[ContextErrorFunc]()
 )
 
 // Discrete function signatures that are allowed as part of a [Callable].

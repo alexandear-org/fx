@@ -66,7 +66,7 @@ func Populate(targets ...any) Option {
 	fields := make([]reflect.StructField, len(targets)+1)
 	fields[0] = reflect.StructField{
 		Name:      "In",
-		Type:      reflect.TypeOf(In{}),
+		Type:      reflect.TypeFor[In](),
 		Anonymous: true,
 	}
 	for i, t := range targets {
@@ -85,7 +85,7 @@ func Populate(targets ...any) Option {
 		default:
 			rt = reflect.TypeOf(t)
 		}
-		if rt.Kind() != reflect.Ptr {
+		if rt.Kind() != reflect.Pointer {
 			return Error(fmt.Errorf("failed to Populate: target %v is not a pointer type, got %T", i+1, t))
 		}
 		fields[i+1] = reflect.StructField{

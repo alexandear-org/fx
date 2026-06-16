@@ -169,7 +169,7 @@ func runProvide(c container, p provide, opts ...dig.ProvideOption) error {
 			for i := 0; i < ft.NumOut(); i++ {
 				t := ft.Out(i)
 
-				if t == reflect.TypeOf(Annotated{}) {
+				if t == reflect.TypeFor[Annotated]() {
 					return fmt.Errorf(
 						"fx.Annotated should be passed to fx.Provide directly, "+
 							"it should not be returned by the constructor: "+

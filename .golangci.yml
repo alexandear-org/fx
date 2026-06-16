@@ -18,6 +18,7 @@ linters:
 
     # Our own extras:
     - errorlint
+    - modernize
     - nolintlint  # lints //nolint directives
     - revive
 
@@ -28,11 +29,10 @@ linters:
 
     # These govet checks are disabled by default, but they're useful.
     govet:
-      enable:
-        - nilness
-        - reflectvaluecompare
-        - sortslice
-        - unusedwrite
+      enable-all: true
+      disable:
+        - fieldalignment
+        - shadow
 
     goheader:
       values:

@@ -19,7 +19,6 @@
 // THE SOFTWARE.
 
 //go:build windows
-// +build windows
 
 package fx
 

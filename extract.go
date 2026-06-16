@@ -27,7 +27,7 @@ import (
 	"unicode/utf8"
 )
 
-var _typeOfIn = reflect.TypeOf(In{})
+var _typeOfIn = reflect.TypeFor[In]()
 
 // Extract fills the given struct with values from the dependency injection
 // container on application initialization. The target MUST be a pointer to a
@@ -37,7 +37,7 @@ var _typeOfIn = reflect.TypeOf(In{})
 func Extract(target any) Option {
 	v := reflect.ValueOf(target)
 
-	if t := v.Type(); t.Kind() != reflect.Ptr || t.Elem().Kind() != reflect.Struct {
+	if t := v.Type(); t.Kind() != reflect.Pointer || t.Elem().Kind() != reflect.Struct {
 		return Error(fmt.Errorf("Extract expected a pointer to a struct, got a %v", t))
 	}
 
@@ -99,7 +99,7 @@ func Extract(target any) Option {
 			// https://github.com/golang/go/issues/21122
 
 			t := f.Type
-			if t.Kind() == reflect.Ptr {
+			if t.Kind() == reflect.Pointer {
 				t = t.Elem()
 			}
 

@@ -100,13 +100,13 @@ var (
 	// field used for embedding fx.In type in generated struct.
 	_inAnnotationField = reflect.StructField{
 		Name:      "In",
-		Type:      reflect.TypeOf(In{}),
+		Type:      reflect.TypeFor[In](),
 		Anonymous: true,
 	}
 	// field used for embedding fx.Out type in generated struct.
 	_outAnnotationField = reflect.StructField{
 		Name:      "Out",
-		Type:      reflect.TypeOf(Out{}),
+		Type:      reflect.TypeFor[Out](),
 		Anonymous: true,
 	}
 )
@@ -120,7 +120,7 @@ type Annotation interface {
 }
 
 var (
-	_typeOfError = reflect.TypeOf((*error)(nil)).Elem()
+	_typeOfError = reflect.TypeFor[error]()
 	_nilError    = reflect.Zero(_typeOfError)
 )
 
@@ -661,8 +661,8 @@ func (la *lifecycleHookAnnotation) build(ann *annotated) (any, error) {
 }
 
 var (
-	_typeOfLifecycle = reflect.TypeOf((*Lifecycle)(nil)).Elem()
-	_typeOfContext   = reflect.TypeOf((*context.Context)(nil)).Elem()
+	_typeOfLifecycle = reflect.TypeFor[Lifecycle]()
+	_typeOfContext   = reflect.TypeFor[context.Context]()
 )
 
 // validateHookDeps validates the dependencies of a hook function and returns true if the dependencies are valid.
@@ -1299,7 +1299,7 @@ func (at *asAnnotation) apply(ann *annotated) error {
 			continue
 		}
 		t := reflect.TypeOf(typ)
-		if t.Kind() != reflect.Ptr || t.Elem().Kind() != reflect.Interface {
+		if t.Kind() != reflect.Pointer || t.Elem().Kind() != reflect.Interface {
 			return fmt.Errorf("fx.As: argument must be a pointer to an interface: got %v", t)
 		}
 		t = t.Elem()
@@ -1498,7 +1498,7 @@ func (fr *fromAnnotation) apply(ann *annotated) error {
 			return errors.New("fx.From: cannot annotate a variadic argument")
 		}
 		t := reflect.TypeOf(typ)
-		if t == nil || t.Kind() != reflect.Ptr {
+		if t == nil || t.Kind() != reflect.Pointer {
 			return fmt.Errorf("fx.From: argument must be a pointer to a type that implements some interface: got %v", t)
 		}
 		fr.types[i] = t.Elem()

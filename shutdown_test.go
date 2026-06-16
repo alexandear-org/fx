@@ -189,7 +189,6 @@ func TestDataRace(t *testing.T) {
 	// the signal received.
 	wg.Add(N)
 	for i := range N {
-		i := i
 		go func() {
 			defer wg.Done()
 			<-ready

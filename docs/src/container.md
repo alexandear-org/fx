@@ -18,8 +18,8 @@ type App
   func (app *App) Run()
 
 type Option
-  func Provide(constructors ...interface{}) Option
-  func Invoke(funcs ...interface{}) Option
+  func Provide(constructors ...any) Option
+  func Invoke(funcs ...any) Option
 ```
 
 Check the [API Reference](https://pkg.go.dev/go.uber.org/fx#Option)
@@ -82,7 +82,7 @@ it can only be used for non-interface values.
     on runtime reflection to determine the type of the value.
 
     Passing an interface value to `fx.Supply` is a lossy operation:
-    it loses the original interface type, only giving us `interface{}`,
+    it loses the original interface type, only giving us `any`,
     at which point reflection will only reveal the concrete type of the value.
 
     For example, consider:
