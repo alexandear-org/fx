@@ -82,7 +82,7 @@ func TestStart_UnexpectedExit(t *testing.T) {
 	assert.Contains(t, result.Errors[0], "application exited unexpectedly")
 }
 
-func TestStart_Timoeut(t *testing.T) {
+func TestStart_Timeout(t *testing.T) {
 	result := test.WithFake(t, func(t test.T) {
 		Start(t, func() {
 			fmt.Println("Not what we want")

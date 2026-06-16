@@ -113,7 +113,7 @@ func TestDecorateSuccess(t *testing.T) {
 				return &Coffee{Name: "Americano", Price: 3}
 			}, fx.ResultTags(`group:"coffee"`))),
 			fx.Provide(fx.Annotate(func() *Coffee {
-				return &Coffee{Name: "Cappucino", Price: 4}
+				return &Coffee{Name: "Cappuccino", Price: 4}
 			}, fx.ResultTags(`group:"coffee"`))),
 			fx.Provide(fx.Annotate(func() *Coffee {
 				return &Coffee{Name: "Cold Brew", Price: 4}

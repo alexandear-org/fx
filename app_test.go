@@ -615,7 +615,7 @@ func TestPrivateProvideWithDecorators(t *testing.T) {
 }
 
 func TestWithLoggerErrorUseDefault(t *testing.T) {
-	// This test cannot be run in paralllel with the others because
+	// This test cannot be run in parallel with the others because
 	// it hijacks stderr.
 
 	// Temporarily hijack stderr and restore it after this test so
@@ -1065,7 +1065,7 @@ func TestInvokes(t *testing.T) {
 		require.ErrorIs(t, invoked[0].(*fxevent.Invoked).Err, wantErr)
 	})
 
-	t.Run("ErrorsAreNotOverriden", func(t *testing.T) {
+	t.Run("ErrorsAreNotOverridden", func(t *testing.T) {
 		t.Parallel()
 
 		type A struct{}
